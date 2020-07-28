@@ -28,13 +28,18 @@ up in their queue of cases to look at.
 
 ### 2. Algorithm Design and Function
 
-<< Insert Algorithm Flowchart >>
+![](images\Dicom_FlowChart.png)
 
-**DICOM Checking Steps:**
+**DICOM Checking Steps:** To verify that the DICOM file is correct for our algorithm we need to make sure the image modality
+is equal to 'DX' (Digital Radiography), we need to check that the position of the patient during the scan is either 'PA' or 'AP',
+and we need to make sure that the body part examined is 'CHEST'.
 
-**Preprocessing Steps:**
+**Preprocessing Steps:** The preprocessing for this model is very simple. All we do is rescale the pixel values from the
+range of 0-255 down to 0-1 by dividing each pixel by 255. This helps when training the network.
 
-**CNN Architecture:**
+**CNN Architecture:** The model used is a pre-trained DenseNet201 architecture with a single fully connected output layer of
+size 1 to output a probability of pneumonia. The model was pre-trained on the 'imagenet' dataset. The entire DenseNet architecture
+is explained in this [paper](https://arxiv.org/pdf/1608.06993.pdf). 
 
 
 ### 3. Algorithm Training
