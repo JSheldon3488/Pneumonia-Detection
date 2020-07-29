@@ -79,7 +79,12 @@ validation sets with negative cases was sampled at random from the original data
   * Negative Cases: 572
 
 ### 5. Ground Truth
-
+This [NIH Chest X-ray Dataset](https://www.kaggle.com/nih-chest-xrays/data) is comprised of 112,120 X-ray images with disease 
+labels from 30,805 unique patients. To create these labels, the authors used Natural Language Processing to text-mine disease 
+classifications from the associated radiological reports. The labels are expected to be >90% accurate and suitable for weakly-supervised learning.
+Using NLP to create ground truth labels for the images is beneficial because of the massive volume of x-rays you can classify
+by just having the associated radiologist report. To do this by hand would be much more expensive and time consuming. 
+The downside of this is that this method is not 100% accurate and you could end up with inaccurate classifications that confuse your models. 
 
 
 ### 6. FDA Validation Plan
