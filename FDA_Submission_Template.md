@@ -45,18 +45,21 @@ is explained in this [paper](https://arxiv.org/pdf/1608.06993.pdf).
 ### 3. Algorithm Training
 
 **Parameters:**
-* Types of augmentation used during training
-* Batch size
-* Optimizer learning rate
-* Layers of pre-existing architecture that were frozen
-* Layers of pre-existing architecture that were fine-tuned
-* Layers added to pre-existing architecture
+* Types of augmentation used during training: horizontal flip, rotation_range=20, shear_range=0.1, zoom_range=0.15
+* Batch size: 128
+* Optimizer learning rate: 1e-5
+* Layers of pre-existing architecture that were frozen: First 160
+* Layers of pre-existing architecture that were fine-tuned: Last 40
+* Layers added to pre-existing architecture: Single output layer changed from 1000 class classification to a single class classification.
 
-<< Insert algorithm training performance visualization >> 
+![](images\DenseNet_history.png)
 
-<< Insert P-R curve >>
+![](images\DenseNet_f1_score.png)
 
-**Final Threshold and Explanation:**
+**Final Threshold and Explanation:** Based on the indications of use statement, we would like this algorithm to have high
+recall in order to aid the radiologist with detecting high risk pneumonia cases early in their workflow. That being said we still
+would like some precision so that we are not sending too many false positives to the radiologist. Based on these factors and looking
+at the precision recall curves above, I used a threshold value of 1.35.
 
 ### 4. Databases
  (For the below, include visualizations as they are useful and relevant)
