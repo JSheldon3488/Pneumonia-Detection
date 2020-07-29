@@ -62,13 +62,21 @@ would like some precision so that we are not sending too many false positives to
 at the precision recall curves above, I used a threshold value of 1.35.
 
 ### 4. Databases
- (For the below, include visualizations as they are useful and relevant)
+Dataset size: 112,120, Pneumonia Cases: 1431
 
-**Description of Training Dataset:** 
+Due to how uncommon Pneumonia is in the dataset we made some modifications to the training and validation sets. 90% of the
+positive cases went into the training set and the remaining 10% are in the validation set. The data to fill out the training and
+validation sets with negative cases was sampled at random from the original databases negative cases.
 
+**Description of Training Dataset:** 50/50 split of positive/negative pneumonia cases.
+  * Training Set Size: 2576 
+  * Positive Cases: 1288 
+  * Negative Cases: 1288
 
-**Description of Validation Dataset:** 
-
+**Description of Validation Dataset:** 20/80 split of positive/negative pneumonia cases.
+  * Validation Set Size: 715
+  * Positive Cases: 143
+  * Negative Cases: 572
 
 ### 5. Ground Truth
 
