@@ -28,7 +28,9 @@ up in their queue of cases to look at.
 
 ### 2. Algorithm Design and Function
 
-![](https://github.com/JSheldon3488/Pneumonia-Detection/blob/master/images/Dicom_FlowChart.png)
+<p align="center">
+    <img src = "https://github.com/JSheldon3488/Pneumonia-Detection/blob/master/images/Dicom_FlowChart.png">
+</p>
 
 **DICOM Checking Steps:** To verify that the DICOM file is correct for our algorithm we need to make sure the image modality
 is equal to 'DX' (Digital Radiography), we need to check that the position of the patient during the scan is either 'PA' or 'AP',
@@ -52,9 +54,13 @@ is explained in this [paper](https://arxiv.org/pdf/1608.06993.pdf).
 * Layers of pre-existing architecture that were fine-tuned: Last 40
 * Layers added to pre-existing architecture: Single output layer changed from 1000 class classification to a single class classification.
 
-![](images\DenseNet_history.png)
+<p align="center">
+    <img src = "https://github.com/JSheldon3488/Pneumonia-Detection/blob/master/images/DenseNet_history.png">
+</p>
 
-![](images\DenseNet_f1_score.png)
+<p align="center">
+    <img src = "https://github.com/JSheldon3488/Pneumonia-Detection/blob/master/images/DenseNet_f1_score.png">
+</p>
 
 **Final Threshold and Explanation:** Based on the indications of use statement, we would like this algorithm to have high
 recall in order to aid the radiologist with detecting high risk pneumonia cases early in their workflow. That being said we still
