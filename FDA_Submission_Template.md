@@ -89,8 +89,24 @@ The downside of this is that this method is not 100% accurate and you could end 
 
 ### 6. FDA Validation Plan
 
-**Patient Population Description for FDA Validation Dataset:**
+**Patient Population Description for FDA Validation Dataset:** The patient population to use for the validation set could be
+anyone that would typically go to hospital and be checked for pneumonia. This includes males and females of any age. We do not
+need to exclude any diseases from this population because the goal is to be able to detect pneumonia from a chest x-ray
+independent of other factors. It would be necessary to have at least 10% of the chest x-rays to include pneumonia so that
+we can evaluate the algorithms performance. In order for the model to work the images need to be chest x-rays 
+(Digital Radiography of the chest area) because that is what the model was trained on.
 
-**Ground Truth Acquisition Methodology:**
+**Ground Truth Acquisition Methodology:** To obtain optimal ground truth labels it would be very beneficial to have multiple
+radiologist classify the chest x-rays in the validation set for pneumonia. If using an odd number of radiologist go with
+the classification that gets the most votes. If using an even number of radiologist break a tie by considering years of experience
+as a radiologist. For example, if using 4 radiologist and the final vote is 2/2 then sum up the radiologist years of experience
+for each classification and choose the group that has more years of experience.
 
-**Algorithm Performance Standard:**
+**Algorithm Performance Standard:** F1 Score: 0.387
+The goal is to be able to accurately classify pneumonia from only looking at the x_ray image with a reasonable level of accuracy.
+Finding a 'reasonable level' of accuracy for this task is more complicated than just considering how often the model correctly classifies
+pneumonia vs not pneumonia. Pneumonia is rare in our dataset (1.276%) so a naive model could just classify every image as not pneumonia
+do very well (98.724% Accurate). Therefore we need to use other metrics like Recall, Precision, and F1 Score to evaluate the model.
+This [paper](https://arxiv.org/pdf/1711.05225.pdf) goes into detail on finding a good baseline accuracy. According to this paper
+the average radiologist F1 score for detecting pneumonia from x_ray images with no other information about the patients
+is 0.387 (based on the radiologist they used for this study). We will use this as our performance standard.
