@@ -28,7 +28,7 @@ up in their queue of cases to look at.
 
 ### 2. Algorithm Design and Function
 
-![](images\Dicom_FlowChart.png)
+![](https://github.com/JSheldon3488/Pneumonia-Detection/blob/master/images/Dicom_FlowChart.png)
 
 **DICOM Checking Steps:** To verify that the DICOM file is correct for our algorithm we need to make sure the image modality
 is equal to 'DX' (Digital Radiography), we need to check that the position of the patient during the scan is either 'PA' or 'AP',
