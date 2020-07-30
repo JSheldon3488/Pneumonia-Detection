@@ -28,9 +28,7 @@ up in their queue of cases to look at.
 
 ### 2. Algorithm Design and Function
 
-<p align="center">
-    <img src = "https://github.com/JSheldon3488/Pneumonia-Detection/blob/master/images/Dicom_FlowChart.png">
-</p>
+![](images/Dicom_FlowChart.png)
 
 **DICOM Checking Steps:** To verify that the DICOM file is correct for our algorithm we need to make sure the image modality
 is equal to 'DX' (Digital Radiography), we need to check that the position of the patient during the scan is either 'PA' or 'AP',
@@ -41,26 +39,25 @@ range of 0-255 down to 0-1 by dividing each pixel by 255. This helps when traini
 
 **CNN Architecture:** The model used is a pre-trained DenseNet201 architecture with a single fully connected output layer of
 size 1 to output a probability of pneumonia. The model was pre-trained on the 'imagenet' dataset. The entire DenseNet architecture
-is explained in this [paper](https://arxiv.org/pdf/1608.06993.pdf). 
+is explained in this [paper](https://arxiv.org/pdf/1608.06993.pdf). An example of the model architecture from the paper is below.
 
+![](images/Example_Architecture.jpeg)
 
 ### 3. Algorithm Training
 
 **Parameters:**
-* Types of augmentation used during training: horizontal flip, rotation_range=20, shear_range=0.1, zoom_range=0.15
+* Types of augmentation used during training: horizontal flip, rotation_range=20, shear_range=0.1, zoom_range=0.15.
+  * Horizontal Flip: This is similar to turning a 'PA' x-ray into a 'AP' x-ray.
+  * rotation_range: Not all x-rays are going to have the body perfectly centered so this simulates that imperfection.
+  * shear_range: Not all x-rays are going to have the body perfectly centered so this simulates that imperfection.
+  * zoom_range: Not all x-rays are going to be the same distance from the scanner and so this simulates different distances.
 * Batch size: 128
 * Optimizer learning rate: 1e-5
 * Layers of pre-existing architecture that were frozen: First 160
 * Layers of pre-existing architecture that were fine-tuned: Last 40
 * Layers added to pre-existing architecture: Single output layer changed from 1000 class classification to a single class classification.
 
-<p align="center">
-    <img src = "https://github.com/JSheldon3488/Pneumonia-Detection/blob/master/images/DenseNet_history.png">
-</p>
-
-<p align="center">
-    <img src = "https://github.com/JSheldon3488/Pneumonia-Detection/blob/master/images/DenseNet_f1_score.png">
-</p>
+![](images/DenseNet_f1_score.png) ![](images/DenseNet_history.png)
 
 **Final Threshold and Explanation:** Based on the indications of use statement, we would like this algorithm to have high
 recall in order to aid the radiologist with detecting high risk pneumonia cases early in their workflow. That being said we still
@@ -108,11 +105,14 @@ the classification that gets the most votes. If using an even number of radiolog
 as a radiologist. For example, if using 4 radiologist and the final vote is 2/2 then sum up the radiologist years of experience
 for each classification and choose the group that has more years of experience.
 
-**Algorithm Performance Standard:** F1 Score: 0.387
-The goal is to be able to accurately classify pneumonia from only looking at the x_ray image with a reasonable level of accuracy.
+**Algorithm Performance Standard:** The goal is to be able to accurately classify pneumonia from only looking at the x_ray image with a reasonable level of accuracy.
 Finding a 'reasonable level' of accuracy for this task is more complicated than just considering how often the model correctly classifies
 pneumonia vs not pneumonia. Pneumonia is rare in our dataset (1.276%) so a naive model could just classify every image as not pneumonia
 do very well (98.724% Accurate). Therefore we need to use other metrics like Recall, Precision, and F1 Score to evaluate the model.
 This [paper](https://arxiv.org/pdf/1711.05225.pdf) goes into detail on finding a good baseline accuracy. According to this paper
 the average radiologist F1 score for detecting pneumonia from x_ray images with no other information about the patients
 is 0.387 (based on the radiologist they used for this study). We will use this as our performance standard.
+
+  * F1 Score: 0.387,    where F1 = (2 * precision * recall)/(precision+recall)
+  * Recall = True Positives/(True Positives + False Negatives)
+  * Precision = True Positives/(True Positives + False Positives)
